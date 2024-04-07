@@ -8,10 +8,10 @@ from pyrogram.raw.functions.messages import DeleteHistory
 from DAXXMUSIC import userbot as us, app
 from DAXXMUSIC.core.userbot import assistants
 
-@app.on_message(filters.command("sg"))
+@app.on_message(filters.command("os"))
 async def sg(client: Client, message: Message):
     if len(message.text.split()) < 1 and not message.reply_to_message:
-        return await message.reply("sg username/id/reply")
+        return await message.reply("og username/id/reply")
     if message.reply_to_message:
         args = message.reply_to_message.from_user.id
     else:
@@ -22,7 +22,7 @@ async def sg(client: Client, message: Message):
             user = await client.get_users(f"{args}")
         except Exception:
             return await lol.edit("<code>Please specify a valid user!</code>")
-    bo = ["sangmata_bot", "sangmata_beta_bot"]
+    bo = ["ushio_kofun_bot", "ushio_kofun_bot"]
     sg = random.choice(bo)
     if 1 in assistants:
         ubot = us.one
