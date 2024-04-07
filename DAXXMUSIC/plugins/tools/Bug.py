@@ -3,8 +3,8 @@ from datetime import datetime
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
-from DAXXMUSIC import OWNER_ID as owner_id
-from DAXXMUSIC import SUPPORT_CHAT as log,BOT_NAME,START_IMG
+from DAXXMUSIC import DAXXMUSIC
+from DAXXMUSIC import DAXXMUSIC
 from DAXXMUSIC import pbot as Client
 from DAXXMUSIC.utils.errors import capture_err
 
