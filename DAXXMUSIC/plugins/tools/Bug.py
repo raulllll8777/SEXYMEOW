@@ -1,12 +1,9 @@
 from datetime import datetime
-
 from pyrogram import filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery
+from config import OWNER_ID as owner_id
+from DAXXMUSIC import app
 
-from DAXXMUSIC import DAXXMUSIC
-from DAXXMUSIC import DAXXMUSIC
-from DAXXMUSIC import pbot as Client
-from DAXXMUSIC.utils.errors import capture_err
 
 
 def content(msg: Message) -> [None, str]:
@@ -23,9 +20,8 @@ def content(msg: Message) -> [None, str]:
         return None
 
 
-@Client.on_message(filters.command("bug"))
-@capture_err
-async def bug(_, msg: Message):
+@app.on_message(filters.command("bug"))
+async def bugs(_, msg: Message):
     if msg.chat.username:
         chat_username = f"@{msg.chat.username}/{msg.chat.id}"
     else:
@@ -42,46 +38,47 @@ async def bug(_, msg: Message):
     
 
     bug_report = f"""
-❍ #ʙᴜɢ ➛  tg://user?id={owner_id}
+#ʙᴜɢ :  tg://user?id={owner_id}
 
-❍ ʀᴇᴩᴏʀᴛᴇᴅ ʙʏ ➛  {mention}
-❍ ᴜsᴇʀ ɪᴅ ➛  {user_id}
-❍ ᴄʜᴀᴛ ➛  {chat_username}
-❍ ʙᴜɢ ➛  {bugs}
+ʀᴇᴩᴏʀᴛᴇᴅ ʙʏ :  {mention}
+ᴜsᴇʀ ɪᴅ :  {user_id}
+ᴄʜᴀᴛ :  {chat_username}
 
-❍ ᴇᴠᴇɴᴛ sᴛᴀᴍᴩ ➛  {datetimes}"""
+ʙᴜɢ :  {bugs}
+
+ᴇᴠᴇɴᴛ sᴛᴀᴍᴩ :  {datetimes}"""
 
     if msg.chat.type == "private":
-        await msg.reply_text("<b>❍ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ɪs ᴏɴʟʏ ғᴏʀ ɢʀᴏᴜᴩs.</b>")
+        await msg.reply_text("<b>» ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ɪs ᴏɴʟʏ ғᴏʀ ɢʀᴏᴜᴩs.</b>")
         return
 
     if user_id == owner_id:
         if bugs:
             await msg.reply_text(
-                "<b>❍ ᴀʀᴇ ʏᴏᴜ ᴄᴏᴍᴇᴅʏ ᴍᴇ 🤣, ʏᴏᴜ'ʀᴇ ᴛʜᴇ ᴏᴡɴᴇʀ ᴏғ ᴛʜᴇ ʙᴏᴛ.</b>",
+                "<b>» ᴀʀᴇ ʏᴏᴜ ᴄᴏᴍᴇᴅʏ ᴍᴇ 🤣, ʏᴏᴜ'ʀᴇ ᴛʜᴇ ᴏᴡɴᴇʀ ᴏғ ᴛʜᴇ ʙᴏᴛ.</b>",
             )
             return
         else:
-            await msg.reply_text("❍ ᴄʜᴜᴍᴛɪʏᴀ ᴏᴡɴᴇʀ!")
+            await msg.reply_text("ᴄʜᴜᴍᴛɪʏᴀ ᴏᴡɴᴇʀ!")
     elif user_id != owner_id:
         if bugs:
             await msg.reply_text(
-                f"<b>❍ ʙᴜɢ ʀᴇᴩᴏʀᴛ ➛ {bugs}</b>\n\n"
-                "<b>❍ ʙᴜɢ sᴜᴄᴄᴇssғᴜʟʟʏ ʀᴇᴩᴏʀᴛᴇᴅ ᴀᴛ sᴜᴩᴩᴏʀᴛ ᴄʜᴀᴛ !</b>",
+                f"<b>ʙᴜɢ ʀᴇᴩᴏʀᴛ : {bugs}</b>\n\n"
+                "<b>» ʙᴜɢ sᴜᴄᴄᴇssғᴜʟʟʏ ʀᴇᴩᴏʀᴛᴇᴅ ᴀᴛ sᴜᴩᴩᴏʀᴛ ᴄʜᴀᴛ !</b>",
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("ᴄʟᴏsᴇ", callback_data=f"close_reply")]]
+                    [[InlineKeyboardButton("⌯ ᴄʟᴏsᴇ ⌯", callback_data="close_data")]]
                 ),
             )
-            await Client.send_photo(
-                log,
-                photo=START_IMG,
+            await app.send_photo(
+                -1001766825642,
+                photo="https://telegra.ph/file/b61227af05544deb76a34.jpg",
                 caption=f"{bug_report}",
                 reply_markup=InlineKeyboardMarkup(
                     [
-                        [InlineKeyboardButton("ᴠɪᴇᴡ ʙᴜɢ", url=f"{msg.link}")],
+                        [InlineKeyboardButton("⌯ ᴠɪᴇᴡ ʙᴜɢ ⌯", url=f"{msg.link}")],
                         [
                             InlineKeyboardButton(
-                                "ᴄʟᴏsᴇ", callback_data="close_send_photo"
+                                "⌯ ᴄʟᴏsᴇ ⌯", callback_data="close_send_photo"
                             )
                         ],
                     ]
@@ -89,31 +86,16 @@ async def bug(_, msg: Message):
             )
         else:
             await msg.reply_text(
-                f"<b>❍ ɴᴏ ʙᴜɢ ᴛᴏ ʀᴇᴩᴏʀᴛ !</b>",
+                f"<b>» ɴᴏ ʙᴜɢ ᴛᴏ ʀᴇᴩᴏʀᴛ !</b>",
             )
 
 
-@Client.on_callback_query(filters.regex("close_reply"))
-async def close_reply(msg, CallbackQuery):
-    await CallbackQuery.message.delete()
 
 
-@Client.on_callback_query(filters.regex("close_send_photo"))
-async def close_send_photo(_, CallbackQuery):
-    is_Admin = await Client.get_chat_member(
-        CallbackQuery.message.chat.id, CallbackQuery.from_user.id
-    )
-    if not is_Admin.can_delete_messages:
-        return await CallbackQuery.answer(
-            "❍ ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ʀɪɢʜᴛs ᴛᴏ ᴄʟᴏsᴇ ᴛʜɪs.", show_alert=True
-        )
+@app.on_callback_query(filters.regex("close_send_photo"))
+async def close_send_photo(_,  query :CallbackQuery):
+    is_admin = await app.get_chat_member(query.message.chat.id, query.from_user.id)
+    if not is_admin.privileges.can_delete_messages:
+        await query.answer("ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ʀɪɢʜᴛs ᴛᴏ ᴄʟᴏsᴇ ᴛʜɪs.", show_alert=True)
     else:
-        await CallbackQuery.message.delete()
-
-
-help = """
-✿ *ғᴏʀ ʀᴇᴩᴏʀᴛɪɴɢ ᴀ  ʙᴜɢ ✿*
-
- ❍ /bug *➛* ᴛᴏ ʀᴇᴩᴏʀᴛ ᴀ ʙᴜɢ ᴀᴛ sᴜᴩᴩᴏʀᴛ ᴄʜᴀᴛ.
-"""
-mod_name = "ʙᴜɢ"
+        await query.message.delete()
