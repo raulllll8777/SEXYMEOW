@@ -13,7 +13,6 @@ user_data = {}
 today = {}
 
 ARU = [
-    "https://telegra.ph/file/f3b2776b2766e911383f0.jpg",
     "https://graph.org/file/08db66a4374af926c9bd3.jpg",
     "https://graph.org/file/7d9eaee9efe95444fb5e3.jpg",
     "https://telegra.ph/file/f71f13dc4755349c13a70.jpg",
