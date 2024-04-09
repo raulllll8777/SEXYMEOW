@@ -9,7 +9,7 @@ from DAXXMUSIC.mongo.afkdb import add_afk, is_afk, remove_afk
 
 
 
-@app.on_message(filters.command(["afk", "brb","bye"], prefixes=["/", "!", "%", ",", "", ".", "@", "#"])
+@app.on_message(filters.command(["afk", "brb"], prefixes=["/", "!"]))
 async def active_afk(_, message: Message):
     if message.sender_chat:
         return
