@@ -3,7 +3,6 @@ import requests
 import random
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup  
 from DAXXMUSIC import app
-
 regex_gif = ["blush"]
 pht = random.choice(regex_gif)
 url = f"https://api.waifu.pics/sfw/blush}"
